@@ -11,5 +11,5 @@ grumphp:
         whitelist_patterns: [ ]
         exclude: [ ]
         report_format: text
-        ruleset: [ 'cleancode', 'naming' ]
+        ruleset: [ ]
         triggered_by: [ 'php' ]
