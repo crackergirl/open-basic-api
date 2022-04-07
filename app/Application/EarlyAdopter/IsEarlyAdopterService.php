@@ -37,4 +37,5 @@ class IsEarlyAdopterService
 
         return $isEarlyAdopter;
     }
+
 }
