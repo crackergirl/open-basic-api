@@ -35,7 +35,7 @@ class IsEarlyAdopterUserControllerTest extends TestCase
             ->once()
             ->andThrow(new Exception('User not found'));
 
-        $response = $this->get('/api/user/another@email.com');
+        $response = $this->get('/api/users/another@email.com');
 
         $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'User not found']);
     }
@@ -53,7 +53,7 @@ class IsEarlyAdopterUserControllerTest extends TestCase
             ->once()
             ->andReturn($user);
 
-        $response = $this->get('/api/user/email@email.com');
+        $response = $this->get('/api/users/email@email.com');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(['earlyAdopter' => true]);
     }
@@ -71,8 +71,23 @@ class IsEarlyAdopterUserControllerTest extends TestCase
             ->once()
             ->andReturn($user);
 
-        $response = $this->get('/api/user/email@email.com');
+        $response = $this->get('/api/users/email@email.com');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(['earlyAdopter' => false]);
+    }
+    /**
+     * @test
+     */
+    public function genericError()
+    {
+        $this->userDataSource
+            ->expects('findByEmail')
+            ->with('a')
+            ->once()
+            ->andThrow(new Exception('There was an error in the request'));
+
+        $response = $this->get('/api/a');
+
+        $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'There was an error in the request']);
     }
 }
