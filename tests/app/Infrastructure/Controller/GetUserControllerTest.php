@@ -35,9 +35,26 @@ class GetUserControllerTest extends TestCase
             ->never()
             ->andThrow(new Exception('User not found'));
 
-        $response = $this->get('/api/users/id/999');
+        $response = $this->get('/api/user/id/999');
 
         $response->assertExactJson(['error' => 'user does not exist']);
     }
+
+    /**
+    * @test
+    */
+    public function requestMustHaveUserID()
+    {
+        $this->userDataSource
+            ->expects('findById')
+            ->with('999')
+            ->never()
+            ->andThrow(new Exception('User not found'));
+
+        $response = $this->get('/api/users/');
+
+        $response->assertExactJson(['error' => 'The user id is required']);
+    }
+
 
 }
