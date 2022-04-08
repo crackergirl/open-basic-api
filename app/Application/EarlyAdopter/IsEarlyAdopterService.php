@@ -4,6 +4,7 @@ namespace App\Application\EarlyAdopter;
 
 use App\Application\UserDataSource\UserDataSource;
 use Exception;
+use Illuminate\Http\Response;
 
 class IsEarlyAdopterService
 {
@@ -37,5 +38,16 @@ class IsEarlyAdopterService
 
         return $isEarlyAdopter;
     }
+
+
+    public function login(string $id): bool
+    {
+        if($this->userDataSource->findById($id)){
+            return true;
+        }
+       return false;
+    }
+
+
 
 }

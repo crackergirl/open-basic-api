@@ -3,9 +3,7 @@
 namespace Tests\app\Infrastructure\Controller;
 
 use App\Application\UserDataSource\UserDataSource;
-use App\Domain\User;
 use Exception;
-use Illuminate\Http\Response;
 use Mockery;
 use Tests\TestCase;
 
@@ -32,7 +30,7 @@ class GetUserControllerTest extends TestCase
         $this->userDataSource
             ->expects('findById')
             ->with('999')
-            ->never()
+            ->once()
             ->andThrow(new Exception('User not found'));
 
         $response = $this->get('/api/user/id/999');
