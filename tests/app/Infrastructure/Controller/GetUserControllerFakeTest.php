@@ -21,4 +21,17 @@ class GetUserControllerFakeTest extends TestCase
         $response->assertExactJson(['error' => 'user not found']);
     }
 
+    /**
+     * @test
+     */
+    public function userWithGivenIdExists()
+    {
+
+        $this->app->bind(UserDataSource::class, fn () => new FakeUserDataSource());
+
+        $response = $this->get('/api/users/1');
+
+        $response->assertExactJson(["{id: ‘1’, email:’user@user.com’}"]);
+    }
+
 }
