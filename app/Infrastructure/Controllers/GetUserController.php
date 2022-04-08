@@ -13,11 +13,6 @@ class GetUserController extends BaseController
 
     public function __invoke(string $userId): JsonResponse
     {
-        if(strlen($userId)<1){
-            return response()->json([
-            'error' => "The user id is required"
-        ], Response::HTTP_BAD_REQUEST);
-        }
 
         return response()->json([
             'error' => "user does not exist"
