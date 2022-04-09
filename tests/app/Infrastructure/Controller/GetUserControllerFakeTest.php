@@ -8,14 +8,22 @@ use Tests\TestCase;
 
 class GetUserControllerFakeTest extends TestCase
 {
+
+    /**
+     * @setUp
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->bind(UserDataSource::class, fn () => new FakeUserDataSource());
+    }
+
     /**
      * @test
      */
     public function userWithGivenIdNotExists()
     {
-
-        $this->app->bind(UserDataSource::class, fn () => new FakeUserDataSource());
-
         $response = $this->get('/api/users/999');
 
         $response->assertExactJson(['error' => 'user not found']);
@@ -26,12 +34,9 @@ class GetUserControllerFakeTest extends TestCase
      */
     public function userWithGivenIdExists()
     {
-
-        $this->app->bind(UserDataSource::class, fn () => new FakeUserDataSource());
-
         $response = $this->get('/api/users/1');
 
-        $response->assertExactJson(["{id: ‘1’, email:’user@user.com’}"]);
+        $response->assertExactJson(["{id:1, email:’user@user.com’}"]);
     }
 
 }

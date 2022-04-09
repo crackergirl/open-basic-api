@@ -25,7 +25,7 @@ class GetUserController extends BaseController
         try {
             if ($this->isEarlyAdopterService->login($userId)) {
                 return response()->json([
-                    "{id: ‘1’, email:’user@user.com’}"], Response::HTTP_BAD_REQUEST);
+                    "{id:".$userId.", email:’user@user.com’}"], Response::HTTP_BAD_REQUEST);
             }
         }catch (Exception $exception) {
             return response()->json([
