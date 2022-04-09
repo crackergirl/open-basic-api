@@ -23,6 +23,19 @@ class isFakeEarlyAdopterServiceTest extends TestCase
         $this->assertFalse($isUserEarlyAdopter);
     }
 
+    /**
+     * @test
+     */
+    public function userIdFound()
+    {
+        $this->isEarlyAdopterService = new IsEarlyAdopterService(new FakeUserDataSource());
+        $id = '1';
+
+        $isUserEarlyAdopter = $this->isEarlyAdopterService->login($id);
+
+        $this->assertTrue($isUserEarlyAdopter);
+    }
+
 
 
 }
