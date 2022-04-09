@@ -39,4 +39,15 @@ class GetUserControllerFakeTest extends TestCase
         $response->assertExactJson(["{id:1, email:’user@user.com’}"]);
     }
 
+    /**
+     * @test
+     */
+    public function checkIfListOfUsersIsEmpty()
+    {
+        $response = $this->get('/api/users/list');
+
+        $response->assertExactJson([]);
+    }
+
+
 }

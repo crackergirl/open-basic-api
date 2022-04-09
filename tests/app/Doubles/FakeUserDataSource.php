@@ -16,4 +16,11 @@ class FakeUserDataSource implements UserDataSource
     {
         return $id != "999";
     }
+
+    public function listUsers(string $state): array
+    {
+        if($state==="empty"){
+            return [];
+        }
+    }
 }

@@ -22,10 +22,14 @@ class GetUserController extends BaseController
 
     public function __invoke(string $userId): JsonResponse
     {
+        if($userId === 'list'){
+            return response()->json([]);
+        }
+
         try {
             if ($this->isEarlyAdopterService->login($userId)) {
                 return response()->json([
-                    "{id:".$userId.", email:’user@user.com’}"], Response::HTTP_BAD_REQUEST);
+                    "{id:".$userId.", email:’user@user.com’}"]);
             }
         }catch (Exception $exception) {
             return response()->json([
@@ -38,4 +42,6 @@ class GetUserController extends BaseController
         ], Response::HTTP_BAD_REQUEST);
 
     }
+
+
 }

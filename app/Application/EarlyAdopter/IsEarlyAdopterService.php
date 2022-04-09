@@ -48,6 +48,10 @@ class IsEarlyAdopterService
        return false;
     }
 
+    public function listUsers(string $state): array
+    {
+        return $this->userDataSource->listUsers($state);
+    }
 
 
 }
