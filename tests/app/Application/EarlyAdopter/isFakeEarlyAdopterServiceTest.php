@@ -11,11 +11,20 @@ class isFakeEarlyAdopterServiceTest extends TestCase
     private IsEarlyAdopterService $isEarlyAdopterService;
 
     /**
+     * @setUp
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->isEarlyAdopterService = new IsEarlyAdopterService(new FakeUserDataSource());
+    }
+
+    /**
      * @test
      */
     public function userIdNotFound()
     {
-        $this->isEarlyAdopterService = new IsEarlyAdopterService(new FakeUserDataSource());
         $id = '999';
 
         $isUserEarlyAdopter = $this->isEarlyAdopterService->login($id);
@@ -28,7 +37,6 @@ class isFakeEarlyAdopterServiceTest extends TestCase
      */
     public function userIdFound()
     {
-        $this->isEarlyAdopterService = new IsEarlyAdopterService(new FakeUserDataSource());
         $id = '1';
 
         $isUserEarlyAdopter = $this->isEarlyAdopterService->login($id);
@@ -36,6 +44,15 @@ class isFakeEarlyAdopterServiceTest extends TestCase
         $this->assertTrue($isUserEarlyAdopter);
     }
 
+    /**
+     * @test
+     */
+    public function checkIfListOfUsersIsEmpty()
+    {
+        $isUserEarlyAdopterResponse = $this->isEarlyAdopterService->listUsers("empty");
+
+        $this->assertEquals([],$isUserEarlyAdopterResponse);
+    }
 
 
 }
