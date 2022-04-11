@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Exception;
 use Mockery;
 
-class isUserAdopterUserListControllerTest extends TestCase
+class userListControllerTest extends TestCase
 {
     private UserDataSource $userDataSource;
 
@@ -26,9 +26,8 @@ class isUserAdopterUserListControllerTest extends TestCase
     /**
      * @test
      */
-    /*public function genericError()
+    public function genericError()
     {
-
         $this->userDataSource
             ->expects('listUsers')
             ->once()
@@ -37,14 +36,13 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'There was an error in the request']);
-    }*/
+    }
 
     /**
      * @test
      */
-    /*public function checkIfListOfUsersIsEmpty()
+    public function checkIfListOfUsersIsEmpty()
     {
-
         $this->userDataSource
             ->expects('listUsers')
             ->once()
@@ -53,14 +51,13 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson([]);
-    }*/
+    }
 
     /**
      * @test
      */
-    /*public function checkIfListOfUsersIsNotEmpty()
+    public function checkIfListOfUsersIsNotEmpty()
     {
-
         $this->userDataSource
             ->expects('listUsers')
             ->once()
@@ -69,5 +66,5 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:'1'},{id:'2'},{id:'2'}"]);
-    }*/
+    }
 }

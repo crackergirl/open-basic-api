@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Controllers;
 
-use App\Application\UserAdopter\IsUserListAdopterService;
+use App\Application\UserBasicAPI\UserListService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -10,20 +10,17 @@ use Illuminate\Routing\Controller as BaseController;
 
 class GetUserListController extends BaseController
 {
-    private $isUserListAdopterService;
+    private UserListService $userListService;
 
-    /**
-     * GetUserListController constructor.
-     */
-    public function __construct(IsUserListAdopterService $isUserListAdopterService)
+    public function __construct(UserListService $userListService)
     {
-        $this->isUserListAdopterService = $isUserListAdopterService;
+        $this->userListService = $userListService;
     }
 
     public function __invoke(): JsonResponse
     {
         try {
-            $isUserListAdopter = $this->isUserListAdopterService->execute();
+            $isUserListAdopter = $this->userListService->execute();
 
         } catch (Exception $exception) {
             return response()->json([

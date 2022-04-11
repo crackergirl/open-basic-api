@@ -1,30 +1,22 @@
 <?php
 
-namespace App\Application\UserAdopter;
+namespace App\Application\UserBasicAPI;
 
 use App\Application\UserDataSource\UserDataSource;
 use Exception;
 
-class isUserListAdopterService
+
+class userListService
 {
-    /**
-     * @var UserDataSource
-     */
-    private $userDataSource;
 
+    private UserDataSource $userDataSource;
 
-    /**
-     * IsUserListAdopterService constructor.
-     * @param UserDataSource $userDataSource
-     */
     public function __construct(UserDataSource $userDataSource)
     {
         $this->userDataSource = $userDataSource;
     }
 
     /**
-     * @param string $id_user
-     * @return bool
      * @throws Exception
      */
     public function execute(): array

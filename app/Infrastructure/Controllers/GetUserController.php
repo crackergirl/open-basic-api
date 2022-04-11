@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Controllers;
 
-use App\Application\UserAdopter\IsUserAdopterService;
+use App\Application\UserBasicAPI\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -10,20 +10,17 @@ use Illuminate\Routing\Controller as BaseController;
 
 class GetUserController extends BaseController
 {
-    private $isUserAdopterService;
+    private UserService $userService;
 
-    /**
-     * GetUserController constructor.
-     */
-    public function __construct(IsUserAdopterService $isUserAdopterService)
+    public function __construct(UserService $userService)
     {
-        $this->isUserAdopterService = $isUserAdopterService;
+        $this->userService = $userService;
     }
 
     public function __invoke(string $userId): JsonResponse
     {
         try {
-            $isUserAdopter = $this->isUserAdopterService->execute($userId);
+            $user = $this->userService->execute($userId);
 
         }catch (Exception $exception) {
             return response()->json([
@@ -31,16 +28,10 @@ class GetUserController extends BaseController
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($isUserAdopter){
-            return response()->json([
-                "{id:".$userId.", email:'user@user.com'}"
-            ], Response::HTTP_OK);
-        }else{
+        return response()->json([
+            "{id:".$user->getId().", email:'".$user->getEmail()."'}"
+        ], Response::HTTP_OK);
 
-            return response()->json([
-                'error' => "User not found"
-            ], Response::HTTP_OK);
-        }
     }
 
 

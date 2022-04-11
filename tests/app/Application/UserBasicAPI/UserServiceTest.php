@@ -1,18 +1,19 @@
 <?php
 
-namespace Tests\app\Application\UserAdopter;
+namespace Tests\app\Application\UserBasicAPI;
 
-use App\Application\UserAdopter\IsUserAdopterService;
+use App\Application\UserBasicAPI\UserService;
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
 use PHPUnit\Framework\TestCase;
 use Exception;
 use Mockery;
 
-class isUserAdopterServiceTest extends TestCase
+class userServiceTest extends TestCase
 {
-    private IsUserAdopterService $isUserAdopterService;
+    private UserService $userService;
     private UserDataSource $userDataSource;
+
     /**
      * @setUp
      */
@@ -22,7 +23,7 @@ class isUserAdopterServiceTest extends TestCase
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
 
-        $this->isUserAdopterService = new IsUserAdopterService($this->userDataSource);
+        $this->userService = new UserService($this->userDataSource);
     }
 
     /**
@@ -40,34 +41,13 @@ class isUserAdopterServiceTest extends TestCase
 
         $this->expectException(Exception::class);
 
-        $this->isUserAdopterService->execute($idUser);
+        $this->userService->execute($idUser);
     }
 
     /**
      * @test
      */
-    public function userIsNotUserAdopter()
-    {
-        $idUser = 9999;
-        $email = 'not_user_adopter@email.com';
-
-        $user = new User($idUser, $email);
-
-        $this->userDataSource
-            ->expects('findById')
-            ->with($idUser)
-            ->once()
-            ->andReturn($user);
-
-        $isUserInUserAdopter = $this->isUserAdopterService->execute($idUser);
-
-        $this->assertFalse($isUserInUserAdopter);
-    }
-
-    /**
-     * @test
-     */
-    public function userIsAnUserAdopter()
+    public function userFound()
     {
         $email = 'not_early_adopter@email.com';
         $idUser = 300;
@@ -79,8 +59,8 @@ class isUserAdopterServiceTest extends TestCase
             ->once()
             ->andReturn($user);
 
-        $isUserInUserAdopter = $this->isUserAdopterService->execute($idUser);
+        $isUserInUserAdopter = $this->userService->execute($idUser);
 
-        $this->assertTrue($isUserInUserAdopter);
+        $this->assertEquals($user,$isUserInUserAdopter);
     }
 }

@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Http\Response;
 use Mockery;
 
-class isUserAdopterUserControllerTest extends TestCase
+class userControllerTest extends TestCase
 {
     private UserDataSource $userDataSource;
 
@@ -47,18 +47,16 @@ class isUserAdopterUserControllerTest extends TestCase
     public function userWithGivenIdDoesNotExist()
     {
         $idUser = 9999;
-        $user = new User($idUser, 'user@user.com');
         $this->userDataSource
             ->expects('findById')
             ->with($idUser)
             ->once()
-            ->andReturn($user);
+            ->andThrow(new Exception('User not found'));
 
         $response = $this->get('/api/users/9999');
 
-        $response->assertStatus(Response::HTTP_OK)->assertExactJson(['error' => 'User not found']);
+        $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'User not found']);
     }
-
 
     /**
      * @test
@@ -84,7 +82,7 @@ class isUserAdopterUserControllerTest extends TestCase
     public function userWithGivenIdExists()
     {
         $idUser = 1;
-        $user = new User($idUser, 'user@user.com');
+        $user = new User($idUser, 'patata@gmail.com');
         $this->userDataSource
             ->expects('findById')
             ->with($idUser)
@@ -93,7 +91,7 @@ class isUserAdopterUserControllerTest extends TestCase
 
         $response = $this->get('/api/users/1');
 
-        $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:1, email:'user@user.com'}"]);
+        $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:1, email:'patata@gmail.com'}"]);
     }
 
 }
