@@ -36,6 +36,7 @@ class GetUserController extends BaseController
                 "{id:".$userId.", email:'user@user.com'}"
             ], Response::HTTP_OK);
         }else{
+
             return response()->json([
                 'error' => "User not found"
             ], Response::HTTP_OK);

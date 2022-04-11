@@ -26,7 +26,23 @@ class isUserAdopterUserListControllerTest extends TestCase
     /**
      * @test
      */
-    /*public function genericError()
+    public function genericError()
+    {
+
+        $this->userDataSource
+            ->expects('listUsers')
+            ->once()
+            ->andThrow(new Exception('There was an error in the request'));
+
+        $response = $this->get('/api/users/list');
+
+        $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'There was an error in the request']);
+    }
+
+    /**
+     * @test
+     */
+    public function checkIfListOfUsersIsEmpty()
     {
 
         $this->userDataSource
@@ -34,8 +50,24 @@ class isUserAdopterUserListControllerTest extends TestCase
             ->once()
             ->andReturn([]);
 
-        $response = $this->get('/api/users/list/');
+        $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson([]);
-    }*/
+    }
+
+    /**
+     * @test
+     */
+    public function checkIfListOfUsersIsNotEmpty()
+    {
+
+        $this->userDataSource
+            ->expects('listUsers')
+            ->once()
+            ->andReturn([1,2,2]);
+
+        $response = $this->get('/api/users/list');
+
+        $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:'1'},{id:'2'},{id:'2'}"]);
+    }
 }

@@ -35,8 +35,14 @@ class GetUserListController extends BaseController
             return response()->json([
             ], Response::HTTP_OK);
         } else {
+            $body = "";
+            foreach ($isUserListAdopter as $userId){
+                $body .= "{id:'".$userId."'},";
+            }
+            $body = substr($body, 0, -1);
+
             return response()->json([
-                'error' => "User not found"
+                $body
             ], Response::HTTP_OK);
         }
     }

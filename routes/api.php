@@ -23,11 +23,13 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+
 Route::get('/status', StatusController::class);
 Route::get('user/{email}', IsEarlyAdopterUserController::class);
 Route::get('user/id/{id_user}', GetUserController::class);
+Route::get('users/list', GetUserListController::class);
 Route::get('users/{id_user}', GetUserController::class);
-Route::get('users/list/', GetUserListController::class);
 Route::get('users/', GetUserControllerWithouthID::class);
+
 
 
