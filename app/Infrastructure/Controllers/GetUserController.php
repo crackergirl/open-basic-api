@@ -13,7 +13,7 @@ class GetUserController extends BaseController
     private $isUserAdopterService;
 
     /**
-     * IsEarlyAdopterUserController constructor.
+     * GetUserController constructor.
      */
     public function __construct(IsUserAdopterService $isUserAdopterService)
     {

@@ -4,7 +4,9 @@ use App\Infrastructure\Controllers\GetUserController;
 use App\Infrastructure\Controllers\GetUserControllerWithouthID;
 use App\Infrastructure\Controllers\IsEarlyAdopterUserController;
 use App\Infrastructure\Controllers\StatusController;
+use \App\Infrastructure\Controllers\GetUserListController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +23,11 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get(
-    '/status',
-    StatusController::class
-);
-
+Route::get('/status', StatusController::class);
 Route::get('user/{email}', IsEarlyAdopterUserController::class);
 Route::get('user/id/{id_user}', GetUserController::class);
 Route::get('users/{id_user}', GetUserController::class);
-Route::get('users/list', GetUserController::class);
+Route::get('users/list/', GetUserListController::class);
 Route::get('users/', GetUserControllerWithouthID::class);
 
 

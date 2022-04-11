@@ -8,7 +8,7 @@ Interface UserDataSource
 {
     public function findByEmail(string $email): User;
 
-    public function findById(string $id):User;
+    public function findById(string $id): User;
 
-    public function listUsers(string $state): array;
+    public function listUsers(): array;
 }

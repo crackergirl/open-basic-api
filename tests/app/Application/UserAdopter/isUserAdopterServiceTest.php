@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\app\Application\UserAdopter;
+
 use App\Application\UserAdopter\IsUserAdopterService;
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;

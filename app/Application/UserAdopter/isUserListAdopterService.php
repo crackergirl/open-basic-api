@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Application\EarlyAdopter;
-
+namespace App\Application\UserAdopter;
 use App\Application\UserDataSource\UserDataSource;
 use Exception;
 
-class IsEarlyAdopterService
+class isUserListAdopterService
 {
     /**
      * @var UserDataSource
      */
     private $userDataSource;
 
+
     /**
-     * IsEarlyAdopterService constructor.
+     * IsUserListAdopterService constructor.
      * @param UserDataSource $userDataSource
      */
     public function __construct(UserDataSource $userDataSource)
@@ -22,22 +22,13 @@ class IsEarlyAdopterService
     }
 
     /**
-     * @param string $email
+     * @param string $id_user
      * @return bool
      * @throws Exception
      */
-    public function execute(string $email): bool
+    public function execute(): array
     {
-        $user = $this->userDataSource->findByEmail($email);
-        $isEarlyAdopter = false;
-
-        if ($user->getId() < 1000) {
-            $isEarlyAdopter = true;
-        }
-
-        return $isEarlyAdopter;
+        return $this->userDataSource->listUsers();
     }
-
-
 
 }
