@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Application\UserAdopter;
+
 use App\Application\UserDataSource\UserDataSource;
 use Exception;
 

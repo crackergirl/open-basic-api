@@ -26,7 +26,7 @@ class isUserAdopterUserListControllerTest extends TestCase
     /**
      * @test
      */
-    public function genericError()
+    /*public function genericError()
     {
 
         $this->userDataSource
@@ -37,12 +37,12 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'There was an error in the request']);
-    }
+    }*/
 
     /**
      * @test
      */
-    public function checkIfListOfUsersIsEmpty()
+    /*public function checkIfListOfUsersIsEmpty()
     {
 
         $this->userDataSource
@@ -53,12 +53,12 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson([]);
-    }
+    }*/
 
     /**
      * @test
      */
-    public function checkIfListOfUsersIsNotEmpty()
+    /*public function checkIfListOfUsersIsNotEmpty()
     {
 
         $this->userDataSource
@@ -69,5 +69,5 @@ class isUserAdopterUserListControllerTest extends TestCase
         $response = $this->get('/api/users/list');
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:'1'},{id:'2'},{id:'2'}"]);
-    }
+    }*/
 }

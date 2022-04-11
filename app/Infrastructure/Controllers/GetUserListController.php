@@ -32,8 +32,7 @@ class GetUserListController extends BaseController
         }
 
         if (empty($isUserListAdopter)) {
-            return response()->json([
-            ], Response::HTTP_OK);
+            return response()->json([], Response::HTTP_OK);
         } else {
             $body = "";
             foreach ($isUserListAdopter as $userId){
