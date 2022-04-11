@@ -33,8 +33,6 @@ class IsEarlyAdopterServiceTest extends TestCase
     {
         $email = 'not_existing_email@email.com';
 
-        $user = new User(9999, $email);
-
         $this->userDataSource
             ->expects('findByEmail')
             ->with($email)

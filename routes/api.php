@@ -28,8 +28,8 @@ Route::get(
 
 Route::get('user/{email}', IsEarlyAdopterUserController::class);
 Route::get('user/id/{id_user}', GetUserController::class);
-Route::get('users/', GetUserControllerWithouthID::class);
 Route::get('users/{id_user}', GetUserController::class);
 Route::get('users/list', GetUserController::class);
-Route::get('{generic_error}',IsEarlyAdopterUserController::class);
+Route::get('users/', GetUserControllerWithouthID::class);
+
 

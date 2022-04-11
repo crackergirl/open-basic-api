@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Controllers;
 
-use App\Application\EarlyAdopter\IsEarlyAdopterService;
+use App\Application\UserAdopter\IsUserAdopterService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -10,37 +10,36 @@ use Illuminate\Routing\Controller as BaseController;
 
 class GetUserController extends BaseController
 {
-    private $isEarlyAdopterService;
+    private $isUserAdopterService;
 
     /**
      * IsEarlyAdopterUserController constructor.
      */
-    public function __construct(IsEarlyAdopterService $isEarlyAdopterService)
+    public function __construct(IsUserAdopterService $isUserAdopterService)
     {
-        $this->isEarlyAdopterService = $isEarlyAdopterService;
+        $this->isUserAdopterService = $isUserAdopterService;
     }
 
     public function __invoke(string $userId): JsonResponse
     {
-        if($userId === 'list'){
-            return response()->json([]);
-        }
-
         try {
-            if ($this->isEarlyAdopterService->login($userId)) {
-                return response()->json([
-                    "{id:".$userId.", email:’user@user.com’}"]);
-            }
+            $isUserAdopter = $this->isUserAdopterService->execute($userId);
+
         }catch (Exception $exception) {
             return response()->json([
-                'error' => "user does not exist"
+                'error' => $exception->getMessage()
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        return response()->json([
-            'error' => "user not found"
-        ], Response::HTTP_BAD_REQUEST);
-
+        if ($isUserAdopter){
+            return response()->json([
+                "{id:".$userId.", email:'user@user.com'}"
+            ], Response::HTTP_OK);
+        }else{
+            return response()->json([
+                'error' => "User not found"
+            ], Response::HTTP_OK);
+        }
     }
 
 

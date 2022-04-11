@@ -76,20 +76,6 @@ class IsEarlyAdopterUserControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(['earlyAdopter' => false]);
     }
 
-    /**
-     * @test
-     */
-    public function genericError()
-    {
-        $this->userDataSource
-            ->expects('findByEmail')
-            ->with('a')
-            ->once()
-            ->andThrow(new Exception('There was an error in the request'));
 
-        $response = $this->get('/api/a');
-
-        $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertExactJson(['error' => 'There was an error in the request']);
-    }
 
 }
