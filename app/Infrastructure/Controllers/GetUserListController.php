@@ -20,7 +20,7 @@ class GetUserListController extends BaseController
     public function __invoke(): JsonResponse
     {
         try {
-            $isUserListAdopter = $this->userListService->execute();
+            $userList = $this->userListService->execute();
 
         } catch (Exception $exception) {
             return response()->json([
@@ -28,13 +28,15 @@ class GetUserListController extends BaseController
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        if (empty($isUserListAdopter)) {
+        if (empty($userList)) {
             return response()->json([], Response::HTTP_OK);
         } else {
             $body = "";
-            foreach ($isUserListAdopter as $userId){
+
+            foreach ($userList as $userId){
                 $body .= "{id:'".$userId."'},";
             }
+
             $body = substr($body, 0, -1);
 
             return response()->json([

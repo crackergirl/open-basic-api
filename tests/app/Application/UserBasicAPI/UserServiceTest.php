@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\app\Application\UserBasicAPI;
+namespace Tests\App\Application\UserBasicAPI;
 
 use App\Application\UserBasicAPI\UserService;
 use App\Application\UserDataSource\UserDataSource;
@@ -55,8 +55,8 @@ class userServiceTest extends TestCase
             ->once()
             ->andReturn($user);
 
-        $isUserInUserAdopter = $this->userService->execute(300);
+        $response = $this->userService->execute(300);
 
-        $this->assertEquals($user,$isUserInUserAdopter);
+        $this->assertEquals($user,$response);
     }
 }
