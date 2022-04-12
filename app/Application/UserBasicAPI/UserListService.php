@@ -5,10 +5,8 @@ namespace App\Application\UserBasicAPI;
 use App\Application\UserDataSource\UserDataSource;
 use Exception;
 
-
 class userListService
 {
-
     private UserDataSource $userDataSource;
 
     public function __construct(UserDataSource $userDataSource)
@@ -23,5 +21,4 @@ class userListService
     {
         return $this->userDataSource->listUsers();
     }
-
 }

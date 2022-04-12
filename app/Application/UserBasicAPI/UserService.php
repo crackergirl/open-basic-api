@@ -21,5 +21,4 @@ class userService
     {
         return $this->userDataSource->findById($id_user);
     }
-
 }

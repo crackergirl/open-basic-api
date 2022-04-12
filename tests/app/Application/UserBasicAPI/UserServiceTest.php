@@ -31,17 +31,15 @@ class userServiceTest extends TestCase
      */
     public function userNotFound()
     {
-        $idUser = 9999;
-
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(9999)
             ->once()
             ->andThrow(new Exception('User not found'));
 
         $this->expectException(Exception::class);
 
-        $this->userService->execute($idUser);
+        $this->userService->execute(9999);
     }
 
     /**
@@ -49,17 +47,15 @@ class userServiceTest extends TestCase
      */
     public function userFound()
     {
-        $email = 'not_early_adopter@email.com';
-        $idUser = 300;
-        $user = new User($idUser, $email);
+        $user = new User(300, 'not_early_adopter@email.com');
 
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(300)
             ->once()
             ->andReturn($user);
 
-        $isUserInUserAdopter = $this->userService->execute($idUser);
+        $isUserInUserAdopter = $this->userService->execute(300);
 
         $this->assertEquals($user,$isUserInUserAdopter);
     }

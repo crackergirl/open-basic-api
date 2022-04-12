@@ -21,6 +21,7 @@ class userControllerTest extends TestCase
         parent::setUp();
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
+
         $this->app->bind(UserDataSource::class, fn () => $this->userDataSource);
     }
 
@@ -29,10 +30,9 @@ class userControllerTest extends TestCase
      */
     public function genericError()
     {
-        $idUser = 300;
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(300)
             ->once()
             ->andThrow(new Exception('There was an error in the request'));
 
@@ -46,10 +46,9 @@ class userControllerTest extends TestCase
      */
     public function userWithGivenIdDoesNotExist()
     {
-        $idUser = 9999;
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(9999)
             ->once()
             ->andThrow(new Exception('User not found'));
 
@@ -63,11 +62,11 @@ class userControllerTest extends TestCase
      */
     public function requestMustHaveUserId()
     {
-        $idUser = 300;
-        $user = new User($idUser, 'user@user.com');
+        $user = new User(300, 'user@user.com');
+
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(300)
             ->never()
             ->andReturn($user);
 
@@ -81,11 +80,11 @@ class userControllerTest extends TestCase
      */
     public function userWithGivenIdExists()
     {
-        $idUser = 1;
-        $user = new User($idUser, 'patata@gmail.com');
+        $user = new User(1, 'patata@gmail.com');
+
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(1)
             ->once()
             ->andReturn($user);
 
@@ -93,5 +92,4 @@ class userControllerTest extends TestCase
 
         $response->assertStatus(Response::HTTP_OK)->assertExactJson(["{id:1, email:'patata@gmail.com'}"]);
     }
-
 }
