@@ -2,9 +2,17 @@ Task description:
 
 We have done some php classes with an approach based on unit testing.
 
-At first, we have defined two classes that perform the behavior of a service.
+At first, we have defined two classes that perform the behavior of a service and controller.
 
-These classes are located in the directory application/Application/UserBasicAPI
+These classes are located in the directory app/Application/UserBasicAPI and app/Infrastructure/Controllers
+
+Controllers we have done:
+
+- GetUserController
+
+- GetUserControllerWithoutID
+
+- GetUserListController
 
 We have also implemented test classes to control the requests that are done.
 Integration and unit testing concepts have been used.
