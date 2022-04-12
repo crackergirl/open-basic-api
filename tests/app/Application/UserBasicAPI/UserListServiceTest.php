@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\app\Application\UserBasicAPI;
+namespace Tests\App\Application\UserBasicAPI;
 
 use App\Application\UserBasicAPI\UserListService;
 use App\Application\UserDataSource\UserDataSource;

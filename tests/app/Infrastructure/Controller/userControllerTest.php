@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\app\Infrastructure\Controller;
+namespace Tests\App\Infrastructure\Controller;
 
 use App\Domain\User;
 use Tests\TestCase;
