@@ -20,6 +20,7 @@ class userListControllerTest extends TestCase
         parent::setUp();
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
+
         $this->app->bind(UserDataSource::class, fn () => $this->userDataSource);
     }
 
