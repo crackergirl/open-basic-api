@@ -3,7 +3,6 @@ namespace App\Application\UserBasicAPI;
 
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
-use Exception;
 
 class userService
 {
@@ -15,7 +14,8 @@ class userService
     }
 
     /**
-     * @throws Exception
+     * @param string $id_user
+     * @return User
      */
     public function execute(string $id_user): User
     {

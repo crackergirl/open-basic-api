@@ -1,3 +1,28 @@
+Task description:
+
+We have done some php classes with an approach based on unit testing.
+
+At first, we have defined two classes that perform the behavior of a service.
+
+These classes are located in the directory application/Application/UserBasicAPI
+
+We have also implemented test classes to control the requests that are done.
+Integration and unit testing concepts have been used.
+
+- UserListServiceTest
+
+- UserServiceTest
+
+- UserControllerTest
+
+- UserListControllerTest
+
+Finally, we want to mention that we have used the concept of double testing. To achieve that, a fake class was created (app/Infrastructure/Doubles).
+
+--------------------------------------------------------
+
+Framework: 
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
