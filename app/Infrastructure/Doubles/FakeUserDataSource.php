@@ -6,7 +6,7 @@ use App\Domain\User;
 
 class FakeUserDataSource implements UserDataSource
 {
-    private array $usersList = [];
+    private array $usersList = [1,2,90];
 
     public function findById(string $id): User
     {
