@@ -80,13 +80,11 @@ class userControllerTest extends TestCase
      */
     public function userWithGivenIdExists()
     {
-        $idUser = 1;
-
-        $user = new User($idUser, 'patata@gmail.com');
+        $user = new User(1, 'patata@gmail.com');
 
         $this->userDataSource
             ->expects('findById')
-            ->with($idUser)
+            ->with(1)
             ->once()
             ->andReturn($user);
 
