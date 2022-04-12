@@ -1,26 +1,27 @@
 <?php
 
-namespace Tests\app\Doubles;
+namespace App\Infrastructure\Doubles;
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
 
 class FakeUserDataSource implements UserDataSource
 {
+    private array $usersList = [];
 
     public function findByEmail(string $email): User
     {
         // TODO: Implement findByEmail() method.
     }
 
-    public function findById(string $id): bool
+    public function findById(string $id): User
     {
-        return $id != "999";
+        $user = new User($id, 'user@user.com');
+        return $user;
     }
 
-    public function listUsers(string $state): array
+    public function listUsers(): array
     {
-        if($state==="empty"){
-            return [];
-        }
+        return $this->usersList;
     }
+
 }
